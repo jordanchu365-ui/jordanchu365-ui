@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FSAE Undertray — Jordan Chu</title>
-<meta name="description" content="CFD-driven design of the Northwestern Formula SAE undertray, achieving a 13% downforce increase.">
+<title>Two-Stage Gear Reducer — Jordan Chu</title>
+<meta name="description" content="Design of the input-shaft system for a 70 kW two-stage spur gear reducer: shaft fatigue analysis, AGMA gear analysis, bearing selection, and full drawings.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -455,12 +455,12 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 
   <div class="proj-hero">
     <div class="wrap">
-      <span class="mono eyebrow"><a href="index.html#projects">Projects</a> / FSAE Undertray</span>
-      <h1>Northwestern FSAE Undertray</h1>
+      <span class="mono eyebrow"><a href="index.html#projects">Projects</a> / Gear Reducer</span>
+      <h1>Two-Stage Spur Gear Reducer</h1>
       <div class="proj-meta">
-        <div><span class="k">Year</span><span class="v">2024</span></div>
-        <div><span class="k">Role</span><span class="v">Designer</span></div>
-        <div><span class="k">Tools</span><span class="v">Ansys Fluent · SolidWorks</span></div>
+        <div><span class="k">Year</span><span class="v">Spring 2026</span></div>
+        <div><span class="k">Role</span><span class="v">Shaft A System Lead</span></div>
+        <div><span class="k">Tools</span><span class="v">SolidWorks · GD&amp;T · AGMA · LaTeX</span></div>
       </div>
     </div>
   </div>
@@ -469,62 +469,55 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
     <div class="wrap">
 
       <h2>Project Overview</h2>
-      <p>Design and manufacture an undertray that maximizes downforce and guides turbulent air away from the car.</p>
+      <p>As part of a three-person team in ME 315 (Theory of Machines: Design of Elements), I helped design a complete 70 kW two-stage spur gear transmission that reduces a 2600 rpm input to a 299.4 rpm output. I owned the full input-shaft system — Shaft A — end to end: shaft fatigue design, AGMA analysis of the first-stage pinion, bearing selection, and the complete set of dimensioned part and assembly drawings.</p>
 
-      <h2>Key Takeaways</h2>
-      <p>As a car enthusiast, combining my love for mechanical design and automotive was an incredibly fulfilling experience. I was able to see a direct correlation between my fluids classwork and practical industry applications.</p>
-      <p>I also gained exposure to simulation software, specifically CFD, through Ansys Fluent. The undertray also allowed me to further hone my skills in CAD (SolidWorks).</p>
-
-      <h2>Design Considerations</h2>
-      <p>At the start of the design process, I explored variations in the undertray geometry to evaluate their impact on downforce. Key parameters included ride height, inlet and outlet angles, and overall length. To study these effects, I developed five distinct undertray configurations, using the previous year's design (V1) as a baseline.</p>
-
-      <figure class="fig">
-        <img src="https://static.wixstatic.com/media/16bb20_6153b7ba41a047dc8d50f63870f70e33~mv2.png/v1/fill/w_998,h_174,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/16bb20_6153b7ba41a047dc8d50f63870f70e33~mv2.png" alt="Table of the five undertray configurations and their parameters">
-        <figcaption>Fig. — Five undertray configurations tested against the V1 baseline</figcaption>
-      </figure>
-
-      <p>These five distinct designs were then run through a 2D CFD simulation in Ansys Fluent to determine the optimal parameters.</p>
-
-      <figure class="fig">
-        <img src="https://static.wixstatic.com/media/16bb20_ee1b21c23e0d48c5a7c294bc00778d32~mv2.png/v1/fill/w_998,h_290,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/16bb20_ee1b21c23e0d48c5a7c294bc00778d32~mv2.png" alt="2D CFD simulation results, part 1">
-      </figure>
-      <figure class="fig">
-        <img src="https://static.wixstatic.com/media/16bb20_5f4810f40bbe4564b60a9f24b642abd9~mv2.png/v1/fill/w_998,h_290,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/16bb20_5f4810f40bbe4564b60a9f24b642abd9~mv2.png" alt="2D CFD simulation results, part 2">
-        <figcaption>Fig. — 2D CFD comparison of the five configurations</figcaption>
-      </figure>
-
-      <p>Looking at the L/D ratios, V4 yielded the best results. I utilized the inlet and outlet degrees to guide our final design.</p>
-
-      <figure class="fig">
-        <img src="https://static.wixstatic.com/media/16bb20_6dfd1648d90e4a90a62dc3f44edb744a~mv2.png/v1/fill/w_766,h_740,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/16bb20_6dfd1648d90e4a90a62dc3f44edb744a~mv2.png" alt="Final undertray CAD design" style="max-width:460px;">
-        <figcaption>Fig. — Final undertray geometry</figcaption>
-      </figure>
-
-      <p>The final design was run through CFD to validate the effectiveness of the undertray with the car moving at 30 mph.</p>
-
-      <div class="fig-row">
-        <figure class="fig">
-          <img src="https://static.wixstatic.com/media/16bb20_756d94d349cc4cfea8f3804d578b4d9c~mv2.png/v1/fill/w_814,h_558,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/16bb20_756d94d349cc4cfea8f3804d578b4d9c~mv2.png" alt="3D CFD validation of the final undertray, view 1">
-        </figure>
-        <figure class="fig">
-          <img src="https://static.wixstatic.com/media/16bb20_fc08d4398b884d8b96baef4f1d87cc24~mv2.png/v1/fill/w_790,h_586,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/16bb20_fc08d4398b884d8b96baef4f1d87cc24~mv2.png" alt="3D CFD validation of the final undertray, view 2">
-        </figure>
-      </div>
-
-      <h2>Results</h2>
-      <p>The final undertray fixed to the car yielded the following results:</p>
       <div class="result-strip">
-        <div><span class="mono k">Lift</span><span class="v">−34 N</span></div>
-        <div><span class="mono k">Drag</span><span class="v">5 N</span></div>
-        <div><span class="mono k">L/D</span><span class="v">~7</span></div>
+        <div><span class="mono k">Power</span><span class="v">70 kW</span></div>
+        <div><span class="mono k">Ratio</span><span class="v">8.68 : 1</span></div>
+        <div><span class="mono k">Fatigue life</span><span class="v">Infinite</span></div>
+        <div><span class="mono k">Min FoS</span><span class="v">1.9</span></div>
       </div>
+
+      <h2>Shaft Fatigue Design</h2>
+      <p>Shaft A is driven by the motor through a coupling at 2600 rpm and carries Gear 1, the 17-tooth pinion of the first gear pair. Because the drive starts and stops daily, the transmitted torque fluctuates between zero and its maximum, so it was treated as having equal mean and alternating components.</p>
+
+      <figure class="fig">
+        <img src="images/gear-reducer-fbd.png" alt="Shaft A free body diagram with shear force and bending moment diagrams" style="max-width:620px;">
+        <figcaption>Fig. — Shaft A FBD, shear force, and bending moment diagrams</figcaption>
+      </figure>
+
+      <p>Two critical cross sections were checked using the full set of Marin endurance-limit factors and modified-Goodman fatigue criteria: the gear keyway (Ø50 mm) and the coupling keyway (Ø30 mm). Although the gear section carries the maximum bending moment, the coupling keyway governs — its smaller diameter drives torsional stress up as 1/d³ — giving governing factors of safety of 1.91 (Goodman) and 2.29 (yield). Both exceed the required minimum of 1.3, so the shaft has infinite life.</p>
+
+      <figure class="fig">
+        <img src="images/gear-reducer-shaft-a-drawing.png" alt="Dimensioned SolidWorks drawing of Shaft A with ISO fits and keyway details" style="max-width:680px;">
+        <figcaption>Fig. — Shaft A part drawing with ISO fits (k6 seats) and keyway details</figcaption>
+      </figure>
+
+      <h2>AGMA Gear Analysis</h2>
+      <p>The 17-tooth AISI 1045 pinion (module 5, 20° pressure angle, teeth induction-hardened to ~450 HB) was analyzed with the full AGMA method for both bending and contact (pitting) fatigue at 99% reliability, including dynamic, load-distribution, and stress-cycle factors. The result: a bending factor of safety of 2.72 and a contact factor of safety of 2.14, both with infinite life.</p>
+
+      <figure class="fig">
+        <img src="images/gear-reducer-gear1-drawing.png" alt="Dimensioned drawing of Gear 1 with a gear parameter table" style="max-width:680px;">
+        <figcaption>Fig. — Gear 1 drawing with full gear parameter table</figcaption>
+      </figure>
+
+      <h2>Bearing Selection</h2>
+      <p>Rather than defaulting to identical bearings, each was sized independently to its actual load. Because the gear sits close to the input-side bearing, that bearing carries nearly three times the radial load of the far bearing — so an SKF 6409 was selected near the gear and a smaller SKF 6209 at the far end, both with a Ø45 bore so the shaft's bearing seats stay a single diameter. L10 life calculations gave 27,100 and 45,200 hours respectively, comfortably above the 14,560-hour design requirement, and a 5-year maintenance and replacement plan was set for the transmission.</p>
+
+      <h2>CAD &amp; Documentation</h2>
+      <p>I modeled the complete shaft system in SolidWorks and produced dimensioned part and assembly drawings with ISO fits (k6 bearing and gear seats, H7 housing bores), keyway details, and a ballooned 12-item bill of materials covering the shaft, gear, bearings, spacers, keys, endcaps, and gaskets. All analysis was documented in a full LaTeX appendix.</p>
+
+      <figure class="fig">
+        <img src="images/gear-reducer-assembly-drawing.png" alt="Shaft A assembly drawing with ballooned bill of materials" style="max-width:680px;">
+        <figcaption>Fig. — Shaft A assembly drawing with ballooned BOM</figcaption>
+      </figure>
 
     </div>
   </div>
 
   <div class="wrap pager">
-    <a class="btn ghost" href="project-jack-in-a-box.html">← Prev: Jack-in-a-Box</a>
-    <a class="btn ghost" href="project-camera-clamp.html">Next: MRD Camera Clamp →</a>
+    <a class="btn ghost" href="index.html#projects">← All projects</a>
+    <a class="btn ghost" href="project-brake-caliper.html">Next: Brake Caliper →</a>
   </div>
 
 </main>

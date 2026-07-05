@@ -7,10 +7,13 @@ A fast, ad-free personal portfolio built with plain HTML and CSS. No frameworks,
 | File | What it is |
 |---|---|
 | `index.html` | Main page: about, experience, education, skills, projects, contact |
+| `project-gear-reducer.html` | Two-stage gear reducer project page |
 | `project-brake-caliper.html` | Bike brake caliper project page |
 | `project-jack-in-a-box.html` | Jack-in-a-Box simulator project page |
 | `project-fsae-undertray.html` | FSAE undertray project page |
 | `project-camera-clamp.html` | MRD camera clamp project page |
+| `resume.pdf` | Your resume (the hero button links to this) |
+| `images/` | Gear reducer drawings (extracted from the ME 315 report) |
 
 ## How to publish on GitHub Pages (one-time setup, ~10 minutes)
 
@@ -44,7 +47,7 @@ The images and resume PDF currently load from your **existing Wix site's storage
 1. Save each image to your computer (right-click → Save Image on your live new site).
 2. Create a folder called `images` in your GitHub repository and upload them there.
 3. In each HTML file, replace the long `https://static.wixstatic.com/...` URLs with `images/your-file-name.jpg`.
-4. Upload your resume as `resume.pdf` to the repository, and in `index.html` change the resume button link to `resume.pdf`.
+4. (Already done — your resume is included as `resume.pdf` and the button links to it.)
 
 (You can also ask Claude to do this swap for you — just upload the HTML files and images.)
 
