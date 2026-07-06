@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FSAE Undertray — Jordan Chu</title>
+<meta name="description" content="CFD-driven design of the Northwestern Formula SAE undertray, achieving a 13% downforce increase.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   Jordan Chu — Portfolio stylesheet
+   Palette:
+     --paper  #FAFAF8  page background
+     --ink    #1C1E21  primary text
+     --slate  #5A6472  secondary text
+     --blue   #235789  accent (engineering blue)
+     --line   #E3E3DE  hairlines
+   To change the accent color site-wide, edit --blue below.
+   ============================================================ */
+
+:root {
+  --paper: #FAFAF8;
+  --ink: #1C1E21;
+  --slate: #5A6472;
+  --blue: #235789;
+  --blue-tint: #EDF2F8;
+  --line: #E3E3DE;
+  --card: #FFFFFF;
+  --max: 1080px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "Archivo", -apple-system, "Segoe UI", sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.65;
+  font-size: 17px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mono {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+}
+
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+/* ---------- Header / nav ---------- */
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(250, 250, 248, 0.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 24px;
+  max-width: var(--max);
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.nav .brand {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.nav .brand:hover { text-decoration: none; color: var(--blue); }
+
+.nav ul {
+  display: flex;
+  gap: 26px;
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+.nav ul a {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+.nav ul a:hover { color: var(--blue); text-decoration: none; }
+
+/* ---------- Hero ---------- */
+
+.hero {
+  padding: 88px 0 72px;
+  border-bottom: 1px solid var(--line);
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 56px 56px;
+  background-position: center;
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 48px;
+  align-items: center;
+}
+
+.hero .eyebrow {
+  color: var(--blue);
+  margin-bottom: 18px;
+  display: block;
+}
+
+.hero h1 {
+  font-size: clamp(2.4rem, 6vw, 3.8rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-bottom: 20px;
+}
+
+.hero p.lede {
+  font-size: 1.12rem;
+  color: var(--slate);
+  max-width: 34em;
+  margin-bottom: 32px;
+}
+
+.hero-photo img {
+  width: 210px;
+  height: 210px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  box-shadow: 0 0 0 8px var(--card), 0 0 0 9px var(--line);
+}
+
+.btn-row { display: flex; gap: 14px; flex-wrap: wrap; }
+
+.btn {
+  display: inline-block;
+  padding: 12px 26px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid var(--blue);
+  border-radius: 3px;
+}
+
+.btn.solid { background: var(--blue); color: #fff; }
+.btn.solid:hover { background: #1b466f; text-decoration: none; }
+.btn.ghost { color: var(--blue); background: transparent; }
+.btn.ghost:hover { background: var(--blue-tint); text-decoration: none; }
+
+/* ---------- Sections ---------- */
+
+section { padding: 76px 0; border-bottom: 1px solid var(--line); }
+section:last-of-type { border-bottom: none; }
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  margin-bottom: 44px;
+}
+
+.section-head .label { color: var(--blue); white-space: nowrap; }
+
+.section-head .rule { flex: 1; height: 1px; background: var(--line); }
+
+h2 {
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 48px;
+}
+
+.about-grid p + p { margin-top: 16px; }
+.about-grid .aside {
+  border-left: 2px solid var(--blue);
+  padding-left: 22px;
+  color: var(--slate);
+  font-size: 0.98rem;
+}
+.about-grid .aside strong { color: var(--ink); display: block; margin-bottom: 6px; }
+.about-grid .aside div + div { margin-top: 18px; }
+
+/* ---------- Experience timeline ---------- */
+
+.xp { display: grid; gap: 0; }
+
+.xp-item {
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  gap: 32px;
+  padding: 30px 0;
+  border-top: 1px solid var(--line);
+}
+.xp-item:first-child { border-top: none; padding-top: 0; }
+
+.xp-when { color: var(--blue); padding-top: 5px; }
+.xp-when .place { display: block; color: var(--slate); margin-top: 6px; text-transform: none; letter-spacing: 0.02em; }
+
+.xp-body h3 { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.01em; }
+.xp-body .org { color: var(--slate); font-size: 0.95rem; margin-bottom: 10px; }
+.xp-body p { color: var(--ink); max-width: 62em; }
+.xp-body p + p { margin-top: 10px; }
+
+/* ---------- Education + skills ---------- */
+
+.edu-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; }
+
+.edu-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 28px;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+.edu-card img { width: 64px; flex-shrink: 0; }
+.edu-card h3 { font-size: 1.1rem; margin-bottom: 4px; }
+.edu-card .sub { color: var(--slate); font-size: 0.95rem; }
+
+.skills { display: flex; flex-wrap: wrap; gap: 10px; align-content: flex-start; }
+
+.skill {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: var(--card);
+  color: var(--ink);
+}
+
+/* ---------- Project cards (title-block style) ---------- */
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+.card:hover {
+  text-decoration: none;
+  border-color: var(--blue);
+  box-shadow: 0 10px 28px rgba(28, 30, 33, 0.08);
+  transform: translateY(-3px);
+}
+
+.card .thumb {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--blue-tint);
+}
+.card .thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+.card .card-title {
+  padding: 18px 20px 6px;
+  font-size: 1.12rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.card .card-sub { padding: 0 20px 16px; color: var(--slate); font-size: 0.93rem; }
+
+/* the "title block": a drawing-style metadata strip */
+.title-block {
+  margin-top: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-top: 1px solid var(--line);
+}
+.title-block div {
+  padding: 10px 14px;
+  border-right: 1px solid var(--line);
+}
+.title-block div:last-child { border-right: none; }
+.title-block .k { display: block; color: var(--slate); font-size: 0.62rem; }
+.title-block .v {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.74rem;
+  color: var(--ink);
+}
+
+/* ---------- Contact ---------- */
+
+.contact-grid { display: flex; gap: 48px; flex-wrap: wrap; }
+
+.contact-item .k { color: var(--blue); display: block; margin-bottom: 6px; }
+.contact-item .v { font-size: 1.05rem; }
+
+/* ---------- Footer ---------- */
+
+footer {
+  border-top: 1px solid var(--line);
+  padding: 28px 0 40px;
+  color: var(--slate);
+  font-size: 0.85rem;
+}
+footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+/* ---------- Project detail pages ---------- */
+
+.proj-hero { padding: 64px 0 40px; border-bottom: 1px solid var(--line); }
+.proj-hero .eyebrow { color: var(--blue); display: block; margin-bottom: 14px; }
+.proj-hero h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin-bottom: 22px;
+}
+
+.proj-meta {
+  display: inline-grid;
+  grid-auto-flow: column;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--card);
+  overflow: hidden;
+}
+.proj-meta div { padding: 10px 20px; border-right: 1px solid var(--line); }
+.proj-meta div:last-child { border-right: none; }
+.proj-meta .k { display: block; color: var(--slate); font-size: 0.62rem; }
+.proj-meta .v { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.78rem; }
+
+.proj-body { padding: 56px 0 72px; }
+.proj-body h2 { margin: 44px 0 16px; font-size: 1.35rem; }
+.proj-body h2:first-child { margin-top: 0; }
+.proj-body p { max-width: 46em; }
+.proj-body p + p { margin-top: 14px; }
+.proj-body ol, .proj-body ul { max-width: 44em; margin: 14px 0 14px 24px; }
+.proj-body li + li { margin-top: 6px; }
+
+.fig { margin: 28px 0; }
+.fig img {
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: #fff;
+}
+.fig figcaption {
+  margin-top: 10px;
+  color: var(--slate);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+}
+
+.fig-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.result-strip {
+  display: inline-grid;
+  grid-auto-flow: column;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--card);
+  margin-top: 8px;
+}
+.result-strip div { padding: 14px 26px; border-right: 1px solid var(--line); }
+.result-strip div:last-child { border-right: none; }
+.result-strip .k { display: block; color: var(--slate); font-size: 0.62rem; }
+.result-strip .v { font-weight: 700; font-size: 1.2rem; letter-spacing: -0.01em; }
+
+.pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  border-top: 1px solid var(--line);
+  padding: 28px 0 64px;
+  flex-wrap: wrap;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 820px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-photo { order: -1; }
+  .about-grid, .edu-grid { grid-template-columns: 1fr; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .xp-item { grid-template-columns: 1fr; gap: 8px; padding: 24px 0; }
+  .fig-row { grid-template-columns: 1fr; }
+  section { padding: 56px 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .card { transition: none; }
+  .card:hover { transform: none; }
+}
+
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav" aria-label="Main">
+    <a class="brand" href="index.html">Jordan Chu</a>
+    <ul>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#experience">Experience</a></li>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <div class="proj-hero">
+    <div class="wrap">
+      <span class="mono eyebrow"><a href="index.html#projects">Projects</a> / FSAE Undertray</span>
+      <h1>Northwestern FSAE Undertray</h1>
+      <div class="proj-meta">
+        <div><span class="k">Year</span><span class="v">2024</span></div>
+        <div><span class="k">Role</span><span class="v">Designer</span></div>
+        <div><span class="k">Tools</span><span class="v">Ansys Fluent · SolidWorks</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="proj-body">
+    <div class="wrap">
+
+      <h2>Project Overview</h2>
+      <p>Design and manufacture an undertray that maximizes downforce and guides turbulent air away from the car.</p>
+
+      <h2>Key Takeaways</h2>
+      <p>As a car enthusiast, combining my love for mechanical design and automotive was an incredibly fulfilling experience. I was able to see a direct correlation between my fluids classwork and practical industry applications.</p>
+      <p>I also gained exposure to simulation software, specifically CFD, through Ansys Fluent. The undertray also allowed me to further hone my skills in CAD (SolidWorks).</p>
+
+      <h2>Design Considerations</h2>
+      <p>At the start of the design process, I explored variations in the undertray geometry to evaluate their impact on downforce. Key parameters included ride height, inlet and outlet angles, and overall length. To study these effects, I developed five distinct undertray configurations, using the previous year's design (V1) as a baseline.</p>
+
+      <figure class="fig">
+        <img src="https://static.wixstatic.com/media/16bb20_6153b7ba41a047dc8d50f63870f70e33~mv2.png/v1/fill/w_998,h_174,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/16bb20_6153b7ba41a047dc8d50f63870f70e33~mv2.png" alt="Table of the five undertray configurations and their parameters">
+        <figcaption>Fig. — Five undertray configurations tested against the V1 baseline</figcaption>
+      </figure>
+
+      <p>These five distinct designs were then run through a 2D CFD simulation in Ansys Fluent to determine the optimal parameters.</p>
+
+      <figure class="fig">
+        <img src="https://static.wixstatic.com/media/16bb20_ee1b21c23e0d48c5a7c294bc00778d32~mv2.png/v1/fill/w_998,h_290,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/16bb20_ee1b21c23e0d48c5a7c294bc00778d32~mv2.png" alt="2D CFD simulation results, part 1">
+      </figure>
+      <figure class="fig">
+        <img src="https://static.wixstatic.com/media/16bb20_5f4810f40bbe4564b60a9f24b642abd9~mv2.png/v1/fill/w_998,h_290,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/16bb20_5f4810f40bbe4564b60a9f24b642abd9~mv2.png" alt="2D CFD simulation results, part 2">
+        <figcaption>Fig. — 2D CFD comparison of the five configurations</figcaption>
+      </figure>
+
+      <p>Looking at the L/D ratios, V4 yielded the best results. I utilized the inlet and outlet degrees to guide our final design.</p>
+
+      <figure class="fig">
+        <img src="https://static.wixstatic.com/media/16bb20_6dfd1648d90e4a90a62dc3f44edb744a~mv2.png/v1/fill/w_766,h_740,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/16bb20_6dfd1648d90e4a90a62dc3f44edb744a~mv2.png" alt="Final undertray CAD design" style="max-width:460px;">
+        <figcaption>Fig. — Final undertray geometry</figcaption>
+      </figure>
+
+      <p>The final design was run through CFD to validate the effectiveness of the undertray with the car moving at 30 mph.</p>
+
+      <div class="fig-row">
+        <figure class="fig">
+          <img src="https://static.wixstatic.com/media/16bb20_756d94d349cc4cfea8f3804d578b4d9c~mv2.png/v1/fill/w_814,h_558,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/16bb20_756d94d349cc4cfea8f3804d578b4d9c~mv2.png" alt="3D CFD validation of the final undertray, view 1">
+        </figure>
+        <figure class="fig">
+          <img src="https://static.wixstatic.com/media/16bb20_fc08d4398b884d8b96baef4f1d87cc24~mv2.png/v1/fill/w_790,h_586,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/16bb20_fc08d4398b884d8b96baef4f1d87cc24~mv2.png" alt="3D CFD validation of the final undertray, view 2">
+        </figure>
+      </div>
+
+      <h2>Results</h2>
+      <p>The final undertray fixed to the car yielded the following results:</p>
+      <div class="result-strip">
+        <div><span class="mono k">Lift</span><span class="v">−34 N</span></div>
+        <div><span class="mono k">Drag</span><span class="v">5 N</span></div>
+        <div><span class="mono k">L/D</span><span class="v">~7</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="wrap pager">
+    <a class="btn ghost" href="project-jack-in-a-box.html">← Prev: Jack-in-a-Box</a>
+    <a class="btn ghost" href="project-camera-clamp.html">Next: MRD Camera Clamp →</a>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Jordan Chu</span>
+    <span class="mono">Mechanical Engineering · Northwestern University</span>
+  </div>
+</footer>
+
+</body>
+</html>
